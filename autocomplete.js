@@ -1,3 +1,5 @@
+//CSS from: https://bulma.io/documentation/components/dropdown/
+
 const createAutoComplete = ({root, renderOption}) =>{
 //root is a class
 root.innerHTML = `
@@ -24,7 +26,7 @@ const onInput = async event =>{
         dropdown.classList.remove('is-active');
         return;
     }
-
+    //Found something, 'is-active' is added into first item of dropdown
     resultsWrapper.innerHTML = '';
     dropdown.classList.add('is-active');
 
@@ -32,6 +34,7 @@ const onInput = async event =>{
     for(let movie of movies){
         const option = document.createElement('a');
 
+        //'dropdown-item is in .dropdown CSS from the website.
         option.classList.add('dropdown-item');
         option.innerHTML = renderOption(movie);
         option.addEventListener('click', () =>{
@@ -43,9 +46,12 @@ const onInput = async event =>{
         resultsWrapper.appendChild(option);
     }
 };
-input.addEventListener('input' ,debounce(onInput, 500)); 
-//input.addEventListener('click', onInput);
 
+//
+input.addEventListener('input' ,debounce(onInput, 500)); 
+
+
+// 'event.target' => the event was dispatched
 document.addEventListener('click', event => {
     if(!root.contains(event.target)){
         dropdown.classList.remove('is-active');
